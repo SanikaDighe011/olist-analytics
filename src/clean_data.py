@@ -137,6 +137,9 @@ def clean_geo():
         state=("geolocation_state", lambda s: s.mode().iat[0]),
     ).reset_index()
 
+def same_money(a, b):
+    return abs(a - b) < 0.01
+
 
 def main():
     print("Orders:");      orders = clean_orders()
@@ -195,12 +198,12 @@ def main():
     check("fact_orders: one row per order, no duplicates",
           len(fact) == len(orders) and fact["order_id"].is_unique)
     check("fact_orders: product revenue == sum of raw item prices",
-          np.isclose(fact["product_revenue"].sum(), items["price"].sum()))
+          same_money(fact["product_revenue"].sum(), items["price"].sum()))
     check("fact_orders: payment total == sum of raw payments",
-          np.isclose(fact["payment_total"].sum(), raw_pay_total))
+          same_money(fact["payment_total"].sum(), raw_pay_total))
     check("fact_items: same row count as raw items", len(fact_items) == len(items))
     check("fact_items: price total unchanged after joins",
-          np.isclose(fact_items["price"].sum(), items["price"].sum()))
+          same_money(fact_items["price"].sum(), items["price"].sum()))
     check("fact_items: no duplicate (order_id, order_item_id)",
           not fact_items.duplicated(["order_id", "order_item_id"]).any())
     check("no missing purchase dates", fact["purchase_date"].notna().all())

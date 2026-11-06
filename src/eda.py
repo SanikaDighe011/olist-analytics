@@ -74,7 +74,9 @@ print(f"\nTop 5 revenue days:\n{daily.sort_values(ascending=False).head(5).round
 # ===== 4. WEEKDAY AND HOUR PATTERNS =====
 print("\n=== 4. WEEKDAY / HOUR ===")
 order_days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-dow = d.groupby(d["purchase_date"].dt.day_name())["product_revenue"].mean().reindex(order_days)
+daily_df = daily.rename("revenue").reset_index()
+daily_df["weekday"] = daily_df["purchase_date"].dt.day_name()
+dow = daily_df.groupby("weekday")["revenue"].mean().reindex(order_days)
 print("Average revenue per day, by weekday:\n", dow.round(0).to_string())
 fig, ax = plt.subplots(figsize=(8, 4))
 sns.barplot(x=dow.index, y=dow.values, ax=ax, color="steelblue")
