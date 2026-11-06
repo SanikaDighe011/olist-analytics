@@ -1,0 +1,6 @@
+model,MAE,MAPE_%
+Baseline: 28-day moving average,8184.0,28.8
+Baseline: last day repeated,8286.2,26.7
+Baseline: weekday average (8 wks),7132.3,25.3
+Gradient Boosting,5804.9,19.5
+Holt-Winters,5732.8,19.3

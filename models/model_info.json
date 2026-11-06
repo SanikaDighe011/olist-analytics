@@ -1,0 +1,7 @@
+{
+  "model": "Holt-Winters (damped additive trend, additive weekly seasonality)",
+  "trained_on": "2017-01-05 to 2018-08-20",
+  "last_training_date": "2018-08-20",
+  "training_days": 593,
+  "note": "Forecast dates are after the end of the Olist data, so no actual values exist for them."
+}

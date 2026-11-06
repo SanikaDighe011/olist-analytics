@@ -1,0 +1,5 @@
+month,days_forecast,predicted_revenue,days_in_month,is_full_month
+2018-08,11,352756.33,31,False
+2018-09,30,932918.21,30,True
+2018-10,31,988183.67,31,True
+2018-11,18,554682.55,30,False
